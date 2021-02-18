@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MultiNote.Core.Interfaces;
 using MultiNote.Database.Contexts;
+using MultiNote.Database.Repositories;
 
 namespace MultiNote.API
 {
@@ -20,6 +22,9 @@ namespace MultiNote.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IApplication, Application.Application>();
+            services.AddTransient<INoteRepository, NoteRepository>();
+
             services.AddControllers();
 
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
