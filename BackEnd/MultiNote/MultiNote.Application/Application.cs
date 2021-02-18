@@ -19,9 +19,10 @@ namespace MultiNote.Application
             _notesMapper = new NotesMapper();
         }
 
-        public void AddNote(NoteModel note)
-        {
-            _noteRepository.AddNote(_notesMapper.ModelToEntity(note));
-        }
+        public void AddNote(NoteModel note) => _noteRepository.AddNote(_notesMapper.ModelToEntity(note));
+
+        public void DeleteNote(int id) => _noteRepository.DeleteNote(id);
+
+        public List<NoteView> GetListOfNotes() => _notesMapper.EntityListToViewModelList(_noteRepository.GetNotes());
     }
 }

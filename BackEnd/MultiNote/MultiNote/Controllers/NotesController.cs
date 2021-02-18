@@ -21,13 +21,10 @@ namespace MultiNote.API.Controllers
         {
             _application = application;
         }
-        
+
         // GET: api/Notes
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        public IEnumerable<NoteView> Get() => _application.GetListOfNotes();
 
         // POST: api/Notes
         [HttpPost]
@@ -44,8 +41,10 @@ namespace MultiNote.API.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IEnumerable<NoteView> Delete(int id)
         {
+            _application.DeleteNote(id);
+            return _application.GetListOfNotes();
         }
     }
 }

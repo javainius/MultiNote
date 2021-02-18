@@ -9,5 +9,8 @@ namespace MultiNote.Core.Interfaces
     public interface INoteRepository
     {
         void AddNote(NoteEntity note);
+        List<NoteEntity> GetNotes();
+        void DeleteNote(int id);
+
     }
 }

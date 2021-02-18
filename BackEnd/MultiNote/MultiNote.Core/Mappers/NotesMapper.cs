@@ -4,6 +4,7 @@ using MultiNote.Core.Models;
 using MultiNote.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MultiNote.Core.Mappers
@@ -27,8 +28,18 @@ namespace MultiNote.Core.Mappers
             }).CreateMapper();
         }
 
-        public NoteView EntityToView(NoteEntity point) => _iMapperNoteEntityToNoteView.Map<NoteEntity, NoteView>(point);
+        public List<NoteView> EntityListToViewModelList(List<NoteEntity> notes)
+        {
+            var list = new List<NoteView>();
 
-        public NoteEntity ModelToEntity(NoteModel point) => _iMapperNoteModelToNoteEntity.Map<NoteModel, NoteEntity>(point);
+            list.AddRange(notes.Select(note => _iMapperNoteEntityToNoteView
+            .Map<NoteEntity, NoteView>(note)));
+
+            return list;
+        }
+
+        public NoteView EntityToView(NoteEntity note) => _iMapperNoteEntityToNoteView.Map<NoteEntity, NoteView>(note);
+
+        public NoteEntity ModelToEntity(NoteModel note) => _iMapperNoteModelToNoteEntity.Map<NoteModel, NoteEntity>(note);
     }
 }
