@@ -24,5 +24,7 @@ namespace MultiNote.Application
         public void DeleteNote(int id) => _noteRepository.DeleteNote(id);
 
         public List<NoteView> GetListOfNotes() => _notesMapper.EntityListToViewModelList(_noteRepository.GetNotes());
+
+        public void UpdateNote(NoteModel note) => _noteRepository.UpdateNote(_notesMapper.ModelToEntity(note));
     }
 }

@@ -9,6 +9,6 @@ namespace MultiNote.Core.Interfaces
         void AddNote(NoteModel note);
         List<NoteView> GetListOfNotes();
         void DeleteNote(int id);
-
+        void UpdateNote(NoteModel note);
     }
 }

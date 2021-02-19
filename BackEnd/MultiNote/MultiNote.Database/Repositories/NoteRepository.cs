@@ -26,9 +26,21 @@ namespace MultiNote.Database.Repositories
         public void DeleteNote(int id)
         {
             _context.Remove(_context.Notes.Where(note => note.Id.Equals(id)).FirstOrDefault());
-        } 
+            _context.SaveChanges();
+        }
 
-        public List<NoteEntity> GetNotes() =>_context.Notes.ToList();  
-        
+        public List<NoteEntity> GetNotes() =>_context.Notes.ToList();
+
+        public void UpdateNote(NoteEntity note)
+        {
+            var noteToUpdate = _context.Notes.SingleOrDefault(noteInList => noteInList.Id.Equals(note.Id));
+
+            if (noteToUpdate != null)
+            {
+                noteToUpdate.Content = note.Content;
+                noteToUpdate.Title = note.Title;
+                _context.SaveChanges();
+            }
+        }
     }
 }

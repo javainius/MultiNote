@@ -11,6 +11,6 @@ namespace MultiNote.Core.Interfaces
         void AddNote(NoteEntity note);
         List<NoteEntity> GetNotes();
         void DeleteNote(int id);
-
+        void UpdateNote(NoteEntity note);
     }
 }

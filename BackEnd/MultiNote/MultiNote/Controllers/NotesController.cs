@@ -28,18 +28,17 @@ namespace MultiNote.API.Controllers
 
         // POST: api/Notes
         [HttpPost]
-        public void Post([FromBody] NoteModel note)
+        public void Post([FromBody] NoteModel note) => _application.AddNote(note);
+
+        // PUT: api/Notes/
+        [HttpPut]
+        public StatusCodeResult Put([FromBody] NoteModel note)
         {
-            _application.AddNote(note);
+            _application.UpdateNote(note);
+            return Ok();
         }
 
-        // PUT: api/Notes/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Notes/5
         [HttpDelete("{id}")]
         public IEnumerable<NoteView> Delete(int id)
         {
