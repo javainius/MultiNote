@@ -15,22 +15,22 @@ namespace MultiNote.API.Controllers
     [ApiController]
     public class NotesController : ControllerBase
     {
-        private readonly IApplication _application;
+        private readonly IAppRunner _application;
 
-        public NotesController(IApplication application)
+        public NotesController(IAppRunner application)
         {
             _application = application;
         }
 
         // GET: api/Notes
         [HttpGet]
-        public IEnumerable<NoteView> Get() => _application.GetListOfNotes();
+        public async Task<IEnumerable<NoteView>> Get() => await _application.GetListOfNotes();
 
         // POST: api/Notes
         [HttpPost]
         public void Post([FromBody] NoteModel note) => _application.AddNote(note);
 
-        // PUT: api/Notes/
+        // PUT: api/Notes
         [HttpPut]
         public StatusCodeResult Put([FromBody] NoteModel note)
         {
@@ -40,10 +40,10 @@ namespace MultiNote.API.Controllers
 
         // DELETE: api/Notes/5
         [HttpDelete("{id}")]
-        public IEnumerable<NoteView> Delete(int id)
+        public async Task<IEnumerable<NoteView>> Delete(int id)
         {
             _application.DeleteNote(id);
-            return _application.GetListOfNotes();
+            return await _application.GetListOfNotes();
         }
     }
 }

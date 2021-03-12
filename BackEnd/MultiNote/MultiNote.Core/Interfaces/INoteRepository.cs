@@ -3,14 +3,15 @@ using MultiNote.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MultiNote.Core.Interfaces
 {
     public interface INoteRepository
     {
         void AddNote(NoteEntity note);
-        List<NoteEntity> GetNotes();
+        Task<IEnumerable<NoteEntity>> GetNotesAsync();
         void DeleteNote(int id);
-        void UpdateNote(NoteEntity note);
+        Task UpdateNote(NoteEntity note);
     }
 }

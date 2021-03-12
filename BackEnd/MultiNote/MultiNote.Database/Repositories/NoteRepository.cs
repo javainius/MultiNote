@@ -1,10 +1,12 @@
-﻿using MultiNote.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MultiNote.Core.Entities;
 using MultiNote.Core.Interfaces;
 using MultiNote.Database.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MultiNote.Database.Repositories
 {
@@ -29,9 +31,9 @@ namespace MultiNote.Database.Repositories
             _context.SaveChanges();
         }
 
-        public List<NoteEntity> GetNotes() =>_context.Notes.ToList();
+        public async Task<IEnumerable<NoteEntity>> GetNotesAsync() => await _context.Notes.ToListAsync();
 
-        public void UpdateNote(NoteEntity note)
+        public async Task UpdateNote(NoteEntity note)
         {
             var noteToUpdate = _context.Notes.SingleOrDefault(noteInList => noteInList.Id.Equals(note.Id));
 
@@ -39,7 +41,7 @@ namespace MultiNote.Database.Repositories
             {
                 noteToUpdate.Content = note.Content;
                 noteToUpdate.Title = note.Title;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
     }

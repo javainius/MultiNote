@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MultiNote.Application;
 using MultiNote.Core.Interfaces;
 using MultiNote.Database.Contexts;
 using MultiNote.Database.Repositories;
@@ -22,8 +23,9 @@ namespace MultiNote.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IApplication, Application.Application>();
-            services.AddTransient<INoteRepository, NoteRepository>();
+            services.AddScoped<IAppRunner, AppRunner>();
+            services.AddScoped<INoteRepository, NoteRepository>();
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
 
@@ -36,7 +38,7 @@ namespace MultiNote.API
 
 
             services.AddDbContext<MultiNoteDbContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
         }
 
