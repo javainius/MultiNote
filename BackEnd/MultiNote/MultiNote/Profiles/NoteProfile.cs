@@ -1,20 +1,18 @@
 ﻿using AutoMapper;
 using MultiNote.Core.Entities;
-using MultiNote.Core.Models;
 using MultiNote.Core.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MultiNote.Core.Profiles
+namespace MultiNote.API.Profiles
 {
-    class NoteProfile : Profile
+    public class NoteProfile : Profile
     {
         public NoteProfile()
         {
-            //CreateMap<NoteModel, NoteView>();
             CreateMap<NoteEntity, NoteView>();
-
         }
     }
 }
