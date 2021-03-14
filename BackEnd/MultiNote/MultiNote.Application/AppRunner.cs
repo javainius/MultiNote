@@ -13,7 +13,6 @@ namespace MultiNote.Application
     public class AppRunner : IAppRunner
     {
         private INoteRepository _noteRepository;
-        private NotesMapper _notesMapper;
         private readonly IMapper _mapper;
 
         public AppRunner(INoteRepository noteRepository, /*NotesMapper notesMapper,*/ IMapper mapper)
@@ -27,11 +26,11 @@ namespace MultiNote.Application
 
         public void DeleteNote(int id) => _noteRepository.DeleteNote(id);
 
-        public async Task<IEnumerable<NoteView>> GetListOfNotes() 
+        public async Task<IEnumerable<NoteDTO>> GetListOfNotes() 
         {
             var notes = await _noteRepository.GetNotesAsync();
 
-            return _mapper.Map<IEnumerable<NoteView>>(notes);
+            return _mapper.Map<IEnumerable<NoteDTO>>(notes);
         } 
 
         public void UpdateNote(NoteModel note) => _noteRepository.UpdateNote(_notesMapper.ModelToEntity(note));

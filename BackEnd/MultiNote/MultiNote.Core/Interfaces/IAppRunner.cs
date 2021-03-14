@@ -8,7 +8,7 @@ namespace MultiNote.Core.Interfaces
     public interface IAppRunner
     {
         void AddNote(NoteModel note);
-        Task<IEnumerable<NoteView>> GetListOfNotes();
+        Task<IEnumerable<NoteDTO>> GetListOfNotes();
         void DeleteNote(int id);
         void UpdateNote(NoteModel note);
     }

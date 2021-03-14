@@ -24,7 +24,7 @@ namespace MultiNote.API.Controllers
 
         // GET: api/Notes
         [HttpGet]
-        public async Task<IEnumerable<NoteView>> Get() => await _application.GetListOfNotes();
+        public async Task<IEnumerable<NoteDTO>> Get() => await _application.GetListOfNotes();
 
         // POST: api/Notes
         [HttpPost]
@@ -40,7 +40,7 @@ namespace MultiNote.API.Controllers
 
         // DELETE: api/Notes/5
         [HttpDelete("{id}")]
-        public async Task<IEnumerable<NoteView>> Delete(int id)
+        public async Task<IEnumerable<NoteDTO>> Delete(int id)
         {
             _application.DeleteNote(id);
             return await _application.GetListOfNotes();

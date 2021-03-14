@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MultiNote.API.Profiles
+namespace MultiNote.Core.Profiles
 {
-    public class NoteProfile : Profile
+    public class MappingProfile : Profile
     {
-        public NoteProfile()
+        public MappingProfile()
         {
-            CreateMap<NoteEntity, NoteView>();
+            CreateMap<NoteEntity, NoteDTO>();
         }
     }
 }
